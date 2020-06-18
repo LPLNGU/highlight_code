@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>output</title>
+</head>
+<body>
+    @Override<br>
+    <font color = "red">public</font> <font color = "red">void</font> run() {<br>
+        <font color = "red">while</font> (true) {<br>
+            <font color = "red">synchronized</font> (sharedQueue) {<br>
+                <font color = "red">while</font> (sharedQueue.size() == 0) {<br>
+                    <font color = "red">try</font> {<br>
+                        System.out.println("队列空了，等待生产");<br>
+                        sharedQueue.wait();<br>
+                    } <font color = "red">catch</font> (InterruptedException e) {<br>
+                        e.printStackTrace();<br>
+                    }<br>
+                }<br>
+                Object number = sharedQueue.poll();<br>
+                System.out.println("进行消费 : " + number);<br>
+                sharedQueue.notify();<br>
+            }<br>
+        }<br>
+    }</body>
+</html>
